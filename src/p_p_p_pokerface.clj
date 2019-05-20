@@ -14,23 +14,35 @@
     (str snd)))
 
 (defn pair? [hand]
-  (let [[fst _] hand]
-    (frequencies (str(fst)))))
+  (if
+    (some #(= 2%) (vals (frequencies (map rank hand))))
+      true
+      false))
 
 (defn three-of-a-kind? [hand]
-  nil)
+  (if
+    (some #(= 3%) (vals (frequencies (map rank hand))))
+      true
+      false))
 
 (defn four-of-a-kind? [hand]
-  nil)
+  (if
+    (some #(= 4%) (vals (frequencies (map rank hand))))
+      true
+      false))
 
 (defn flush? [hand]
-  nil)
+  (if (= (count (set (map suit hand))) 1)
+    true
+    false))
 
 (defn full-house? [hand]
-  nil)
+  (if (and (three-of-a-kind? hand) (pair? hand))
+    true
+    false))
 
 (defn two-pairs? [hand]
-  nil)
+  (map pair? hand))
 
 (defn straight? [hand]
   nil)
